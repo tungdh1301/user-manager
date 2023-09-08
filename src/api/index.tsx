@@ -1,10 +1,7 @@
 import axios, { AxiosError } from 'axios';
-import { store } from 'redux/store';
-import { isDevMode } from 'lib/utils';
+import {store} from "../redux/store";
 
 const BASE_URL = process.env.REACT_APP_API_URL;
-export const UPLOAD_FILE_URL = `${BASE_URL}/admin/multiple-image-upload`;
-export const UPLOAD_STORAGE = process.env.REACT_APP_UPLOAD_STORAGE_URL;
 
 type Error = {
     data: any;
@@ -26,7 +23,7 @@ export const getAxiosClient = () => {
  **/
 export const getAxiosClientWithToken = () => {
     const client = getAxiosClient();
-    client.defaults.headers.common['Authorization'] = 'Bearer ' + store.getState().auth.token;
+    // client.defaults.headers.common['Authorization'] = 'Bearer ' + store.getState().auth.token;
     client.defaults.headers.common['Content-Type'] = 'application/json';
     client.defaults.headers.common['Accept'] = 'application/json';
     return client;
@@ -43,6 +40,5 @@ export const getErrorMessage = (error: AxiosError) => {
         return message;
     }
 
-    if (isDevMode()) console.error(error);
     return 'Server Error';
 };
