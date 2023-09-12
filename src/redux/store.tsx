@@ -1,7 +1,7 @@
 import { FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE, persistReducer } from 'redux-persist';
 import { Action, combineReducers, configureStore, ThunkAction } from '@reduxjs/toolkit';
 import storage from 'redux-persist/lib/storage';
-import {listUserSlice} from "./slice/listUserSlice";
+import {UserSlice} from "./slice/UserSlice";
 
 const persistConfig = {
     key: 'root',
@@ -10,14 +10,8 @@ const persistConfig = {
     blacklist: [''],
 };
 
-const authPersistConfig = {
-    key: 'auth',
-    storage,
-    whitelist: ['email', 'name', 'id', 'token', 'role', 'place_id'],
-};
-
 const reducers = combineReducers({
-    listUsers: listUserSlice.reducer,
+    Users: UserSlice.reducer,
     // successModal: successModalSlice.reducer,
 });
 
